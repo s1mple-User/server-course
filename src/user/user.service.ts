@@ -11,7 +11,6 @@ import { User, UserDocument } from './user.model';
 export class UserService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
-    @InjectStripe() private readonly stripeClient: Stripe,
   ) {}
 
   async byId(id: string) {
@@ -54,14 +53,6 @@ export class UserService {
     return user;
   }
 
-  async allTransactions(customerId: string) {
-    const transactions = await this.stripeClient.charges.list({
-      customer: customerId,
-      limit: 100,
-    });
-
-    return transactions.data;
-  }
 
   async myCourses(userId: string) {
     const user = await this.userModel.findById(userId).populate('courses').exec();
