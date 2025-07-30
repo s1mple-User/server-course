@@ -2,8 +2,6 @@ import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/co
 import { InjectModel } from '@nestjs/mongoose';
 import { genSalt, hash } from 'bcryptjs';
 import { Model } from 'mongoose';
-import { InjectStripe } from 'nestjs-stripe';
-import Stripe from 'stripe';
 import { InterfaceEmailAndPassword, UpdateUserDto } from './user.interface';
 import { User, UserDocument } from './user.model';
 

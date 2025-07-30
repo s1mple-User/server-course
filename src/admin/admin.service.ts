@@ -3,12 +3,10 @@ import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import * as SendGrid from '@sendgrid/mail';
 import mongoose, { Model } from 'mongoose';
-import { InjectStripe } from 'nestjs-stripe';
 import { NotFoundError } from 'rxjs';
 import { Course, CourseDocument } from 'src/course/course.model';
 import { Instructor, InstructorDocument } from 'src/instructor/instructor.model';
 import { User, UserDocument } from 'src/user/user.model';
-import Stripe from 'stripe';
 
 @Injectable()
 export class AdminService {
@@ -16,7 +14,6 @@ export class AdminService {
     @InjectModel(Instructor.name) private instructorModel: Model<InstructorDocument>,
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     @InjectModel(Course.name) private courseModel: Model<CourseDocument>,
-    @InjectStripe() private readonly stripeClient: Stripe,
     private readonly configService: ConfigService,
   ) {
     SendGrid.setApiKey(this.configService.get<string>('SEND_GRID_KEY'));

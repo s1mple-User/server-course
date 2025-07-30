@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { compare, genSalt, hash } from 'bcryptjs';
 import { Model } from 'mongoose';
-import { CustomerService } from 'src/customer/customer.service';
 import { User, UserDocument } from 'src/user/user.model';
 import { LoginAuthDto } from './dto/login.dto';
 import { TokenDto } from './dto/token.dto';
@@ -13,7 +12,6 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private readonly jwtService: JwtService,
-    private readonly customerService: CustomerService,
   ) {}
 
   async register(dto: LoginAuthDto) {
@@ -28,7 +26,6 @@ export class AuthService {
       password: dto.password.length ? passwordHash : '',
     });
 
-    await this.customerService.getCustomer(String(newUser._id));
     const token = await this.issueTokenPair(String(newUser._id));
 
     return { user: this.getUserField(newUser), ...token };
@@ -43,7 +40,6 @@ export class AuthService {
       if (!currentPassword) throw new BadRequestException('incorrect_password');
     }
 
-    await this.customerService.getCustomer(String(existUser._id));
     const token = await this.issueTokenPair(String(existUser._id));
     return { user: this.getUserField(existUser), ...token };
   }
