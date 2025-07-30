@@ -27,12 +27,6 @@ export class UserController {
     return this.userService.updateUser(dto, _id);
   }
 
-  @HttpCode(200)
-  @Get('transactions')
-  @Auth()
-  allTransactions(@User('customerId') customerId: string) {
-    return this.userService.allTransactions(customerId);
-  }
 
   @HttpCode(200)
   @Get('my-courses')
