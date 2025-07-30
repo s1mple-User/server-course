@@ -10,7 +10,6 @@ import { UserService } from './user.service';
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    StripeModule.forRoot(),
   ],
   providers: [UserService],
   controllers: [UserController],

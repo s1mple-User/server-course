@@ -11,7 +11,6 @@ import { SectionModule } from './section/section.module';
 import { LessonModule } from './lesson/lesson.module';
 import { AdminModule } from './admin/admin.module';
 import { BooksModule } from './books/books.module';
-import { CustomerModule } from './customer/customer.module';
 import { ReviewModule } from './review/review.module';
 
 @Module({
@@ -31,7 +30,6 @@ import { ReviewModule } from './review/review.module';
     LessonModule,
     AdminModule,
     BooksModule,
-    CustomerModule,
     ReviewModule,
   ],
 })
