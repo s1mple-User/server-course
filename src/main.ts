@@ -10,7 +10,7 @@ app.enableCors({
   credentials: true,
 });
 
-  const PORT =  3001;
+  const PORT =  3000;
   await app.listen(PORT);
   console.log(`App running on port ${PORT}`);
 }
